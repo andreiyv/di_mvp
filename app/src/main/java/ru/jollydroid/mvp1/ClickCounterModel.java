@@ -1,8 +1,8 @@
 package ru.jollydroid.mvp1;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+
+import javax.inject.Inject;
 
 /**
  * Created by tse on 12/08/16.
@@ -10,8 +10,9 @@ import android.preference.PreferenceManager;
 public class ClickCounterModel {
     private final SharedPreferences prefs;
 
-    public ClickCounterModel(Context context) {
-        prefs = PreferenceManager.getDefaultSharedPreferences(context);
+    @Inject
+    public ClickCounterModel(SharedPreferences prefs) {
+        this.prefs = prefs;
     }
 
     public int getCount() {

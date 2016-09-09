@@ -1,21 +1,33 @@
 package ru.jollydroid.mvp1;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
+
+import javax.inject.Inject;
 
 public class MainActivity extends MvpActivity<MainView, MainPresenter> implements MainView {
 
     private FloatingActionButton fab;
 
+    @Inject
+    Resources resources;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ((DemoApplication)getApplication()).component().inject(this);
+        String appname = resources.getString(R.string.app_name);
+        Log.d("happy", "app name is " + appname);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -33,7 +45,7 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     @NonNull
     @Override
     public MainPresenter createPresenter() {
-        return new MainPresenterImpl(getApplicationContext());
+        return ((DemoApplication)getApplication()).component().mainPresenter();
     }
 
     @Override
