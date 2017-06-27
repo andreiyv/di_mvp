@@ -16,7 +16,7 @@ import javax.inject.Inject;
 public class MainActivity extends MvpActivity<MainView, MainPresenter> implements MainView {
 
     private FloatingActionButton fab;
-
+// http://jollydroid.ru/notebook/2016-09-13-Dagger-2-MVP-Unit-Tests.html
     @Inject
     Resources resources;
 
